@@ -1,0 +1,28 @@
+{
+  "name": "reelstudio-video-editor",
+  "version": "1.0.0",
+  "description": "ReelStudio Remotion Video Editing Engine for Instagram Reels & Cinematic Videos",
+  "scripts": {
+    "start": "remotion studio src/index.ts",
+    "build": "remotion render src/index.ts ReelComposition ../Exports/reel.mp4",
+    "render:test": "remotion render src/index.ts TestComposition ../Exports/Test/test.mp4",
+    "render:reel": "remotion render src/index.ts ReelComposition ../Exports/Reel_Output.mp4",
+    "render:landscape": "remotion render src/index.ts LandscapeComposition ../Exports/Landscape_Output.mp4",
+    "render:square": "remotion render src/index.ts SquareComposition ../Exports/Square_Output.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.285",
+    "@remotion/media-utils": "^4.0.285",
+    "@remotion/paths": "^4.0.285",
+    "@remotion/transitions": "^4.0.285",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remotion": "^4.0.285",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "typescript": "^5.8.2"
+  }
+}

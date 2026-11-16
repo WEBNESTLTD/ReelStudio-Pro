@@ -1,0 +1,77 @@
+[
+  {
+    "word": "Welcome",
+    "start": 0.0,
+    "end": 0.42
+  },
+  {
+    "word": "to",
+    "start": 0.42,
+    "end": 0.64
+  },
+  {
+    "word": "Real",
+    "start": 0.64,
+    "end": 0.78
+  },
+  {
+    "word": "Studio",
+    "start": 0.78,
+    "end": 1.22
+  },
+  {
+    "word": "Pro.",
+    "start": 1.22,
+    "end": 1.58
+  },
+  {
+    "word": "Professional",
+    "start": 2.36,
+    "end": 3.12
+  },
+  {
+    "word": "video",
+    "start": 3.12,
+    "end": 3.5
+  },
+  {
+    "word": "editor",
+    "start": 3.5,
+    "end": 3.84
+  },
+  {
+    "word": "with",
+    "start": 3.84,
+    "end": 4.08
+  },
+  {
+    "word": "automated",
+    "start": 4.08,
+    "end": 4.54
+  },
+  {
+    "word": "intelligence",
+    "start": 4.54,
+    "end": 5.18
+  },
+  {
+    "word": "and",
+    "start": 5.18,
+    "end": 5.5
+  },
+  {
+    "word": "instant",
+    "start": 5.5,
+    "end": 5.84
+  },
+  {
+    "word": "beat",
+    "start": 5.84,
+    "end": 6.06
+  },
+  {
+    "word": "synchronization.",
+    "start": 6.06,
+    "end": 6.9
+  }
+]

@@ -1,0 +1,110 @@
+{
+  "projectName": "Demonstration_Reel_Project",
+  "name": "AI_Reel_1794853244",
+  "fps": 30,
+  "aspectRatio": "9:16",
+  "width": 1080,
+  "height": 1920,
+  "duration": 5.43,
+  "tracks": [
+    {
+      "id": "track-video-2",
+      "name": "V2 Overlays & Titles",
+      "type": "video",
+      "muted": false
+    },
+    {
+      "id": "track-video-1",
+      "name": "V1 Main Footage",
+      "type": "video",
+      "muted": false
+    },
+    {
+      "id": "track-audio-1",
+      "name": "A1 Voiceover",
+      "type": "audio",
+      "muted": false
+    },
+    {
+      "id": "track-audio-2",
+      "name": "A2 Music & Beats",
+      "type": "audio",
+      "muted": false
+    }
+  ],
+  "clips": [
+    {
+      "id": "clip_fa1d10",
+      "trackId": "track-video-1",
+      "path": "E:\\reelstudio\\video-editor\\public\\footage\\action_broll.mp4",
+      "mediaPath": "E:\\reelstudio\\video-editor\\public\\footage\\action_broll.mp4",
+      "name": "action_broll.mp4",
+      "mediaName": "action_broll.mp4",
+      "type": "video",
+      "startTime": 0.0,
+      "duration": 3.03,
+      "sourceIn": 0.0,
+      "sourceDuration": 4.0,
+      "volume": 0.0,
+      "colorPreset": "teal_orange",
+      "transition": "zoomIn"
+    },
+    {
+      "id": "clip_57b37f",
+      "trackId": "track-video-1",
+      "path": "E:\\reelstudio\\video-editor\\public\\footage\\interview_speech.mp4",
+      "mediaPath": "E:\\reelstudio\\video-editor\\public\\footage\\interview_speech.mp4",
+      "name": "interview_speech.mp4",
+      "mediaName": "interview_speech.mp4",
+      "type": "video",
+      "startTime": 3.03,
+      "duration": 1.2,
+      "sourceIn": 0.0,
+      "sourceDuration": 4.0,
+      "volume": 0.0,
+      "colorPreset": "teal_orange",
+      "transition": "crossfade"
+    },
+    {
+      "id": "clip_66411c",
+      "trackId": "track-video-1",
+      "path": "E:\\reelstudio\\video-editor\\public\\footage\\interview_speech_no_silence.mp4",
+      "mediaPath": "E:\\reelstudio\\video-editor\\public\\footage\\interview_speech_no_silence.mp4",
+      "name": "interview_speech_no_silence.mp4",
+      "mediaName": "interview_speech_no_silence.mp4",
+      "type": "video",
+      "startTime": 4.23,
+      "duration": 1.2,
+      "sourceIn": 0.0,
+      "sourceDuration": 2.0,
+      "volume": 0.0,
+      "colorPreset": "teal_orange",
+      "transition": "slideLeft"
+    },
+    {
+      "id": "clip_7f5d63",
+      "trackId": "track-audio-2",
+      "path": "E:\\reelstudio\\video-editor\\public\\music\\rhythmic_beat.mp3",
+      "mediaPath": "E:\\reelstudio\\video-editor\\public\\music\\rhythmic_beat.mp3",
+      "name": "rhythmic_beat.mp3",
+      "mediaName": "rhythmic_beat.mp3",
+      "type": "audio",
+      "startTime": 0.0,
+      "duration": 5.43,
+      "sourceIn": 0.0,
+      "sourceDuration": 5.43,
+      "volume": 0.75,
+      "transition": "none"
+    }
+  ],
+  "subtitles": [],
+  "colorPreset": "teal_orange",
+  "activeColorPreset": "teal_orange",
+  "audioMixer": {
+    "master": 1.0,
+    "voice": 1.0,
+    "music": 0.75,
+    "ducking": true,
+    "loudnorm": true
+  }
+}

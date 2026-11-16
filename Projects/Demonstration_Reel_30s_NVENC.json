@@ -1,0 +1,95 @@
+{
+  "projectName": "Demonstration_Reel_30s_NVENC",
+  "aspectRatio": "9:16",
+  "resolution": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 30.0,
+  "colorPreset": "teal_orange",
+  "audioMixer": {
+    "master": 1.0,
+    "voice": 1.0,
+    "music": 0.8,
+    "ducking": true,
+    "loudnorm": true
+  },
+  "clips": [
+    {
+      "path": "E:\\reelstudio\\video-editor\\public\\footage\\qa\\qa_9_16_vertical.mp4",
+      "type": "video",
+      "sourceIn": 0.0,
+      "duration": 6.0,
+      "startTime": 0.0
+    },
+    {
+      "path": "E:\\reelstudio\\video-editor\\public\\footage\\qa\\qa_1080p_landscape.mp4",
+      "type": "video",
+      "sourceIn": 0.0,
+      "duration": 6.0,
+      "startTime": 6.0
+    },
+    {
+      "path": "E:\\reelstudio\\video-editor\\public\\footage\\qa\\qa_speech_dialogue.mp4",
+      "type": "video",
+      "sourceIn": 0.0,
+      "duration": 6.0,
+      "startTime": 12.0
+    },
+    {
+      "path": "E:\\reelstudio\\video-editor\\public\\footage\\qa\\qa_low_light.mp4",
+      "type": "video",
+      "sourceIn": 0.0,
+      "duration": 6.0,
+      "startTime": 18.0
+    },
+    {
+      "path": "E:\\reelstudio\\video-editor\\public\\footage\\qa\\qa_multi_subject.mp4",
+      "type": "video",
+      "sourceIn": 0.0,
+      "duration": 6.0,
+      "startTime": 24.0
+    },
+    {
+      "path": "E:\\reelstudio\\video-editor\\public\\music\\qa\\qa_30s_beat.mp3",
+      "type": "audio",
+      "sourceIn": 0.0,
+      "duration": 30.0,
+      "startTime": 0.0,
+      "volume": 0.8
+    }
+  ],
+  "subtitles": [
+    {
+      "word": "Welcome",
+      "start": 0.0,
+      "end": 0.42
+    },
+    {
+      "word": "to",
+      "start": 0.42,
+      "end": 0.64
+    },
+    {
+      "word": "Real",
+      "start": 0.64,
+      "end": 0.78
+    },
+    {
+      "word": "Studio",
+      "start": 0.78,
+      "end": 1.22
+    },
+    {
+      "word": "Pro.",
+      "start": 1.22,
+      "end": 1.58
+    },
+    {
+      "word": "Professional",
+      "start": 2.36,
+      "end": 3.12
+    }
+  ]
+}

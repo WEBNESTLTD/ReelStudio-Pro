@@ -1,0 +1,250 @@
+{
+  "timestamp": 1794851765.9465773,
+  "summary": {
+    "pass": 18,
+    "fail": 0,
+    "not_tested": 0,
+    "total": 18
+  },
+  "results": [
+    {
+      "feature_num": 1,
+      "name": "Backend Startup & API Health",
+      "status": "PASS",
+      "test_performed": "HTTP GET /api/health (latency: 107.29ms)",
+      "expected": "Status 200, online status, 12 capabilities listed",
+      "actual": "Status 200, status=online, codec=CPU libx264 active",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 2,
+      "name": "Browser Interface Loading",
+      "status": "PASS",
+      "test_performed": "Verified index.html, styles.css (dark theme), app.js routing, and Chrome Headless Shell binary",
+      "expected": "HTML loaded with title, stylesheet (11.5KB+), client script (20KB+), Chromium 158 available",
+      "actual": "HTML 200 OK, CSS 200 OK (26721 bytes), JS 200 OK (51888 bytes)",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 3,
+      "name": "Media Library Scanning",
+      "status": "PASS",
+      "test_performed": "HTTP GET /api/media recursive scan (duration: 1928.7ms)",
+      "expected": "Discovers files across public/footage, music, sound-effects, and qa/ subfolders",
+      "actual": "Discovered 30 total media assets (13 footage, 3 music)",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 4,
+      "name": "Video Import & Metadata Extraction",
+      "status": "PASS",
+      "test_performed": "FFprobe metadata analysis across 4 real test clips (1080p, 4K, 9:16, speech)",
+      "expected": "Accurate resolution, duration, FPS, and aspect ratio parsed for all files",
+      "actual": "qa_1080p_landscape.mp4: 1920x1080 @ 30.0fps (6.0s); qa_9_16_vertical.mp4: 1080x1920 @ 30.0fps (6.0s); qa_4k_cinema.mp4: 3840x2160 @ 30.0fps (5.0s); qa_speech_dialogue.mp4: 1080x1920 @ 30.0fps (7.91s)",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 5,
+      "name": "Video Preview & HTTP 206 Streaming",
+      "status": "PASS",
+      "test_performed": "HTTP Range requests (bytes 0-1MB and bytes 1MB-2MB forward scrub)",
+      "expected": "HTTP 206 Partial Content with Content-Range, Accept-Ranges: bytes, video/mp4",
+      "actual": "Range 1: bytes 0-1048575/4781717; Range 2: bytes 1048576-2097151/4781717",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 6,
+      "name": "Drag-and-Drop Timeline Operations",
+      "status": "PASS",
+      "test_performed": "Drop event simulation mapping client coordinates to dropTime and trackId",
+      "expected": "Generates valid non-destructive clip schema with target track, startTime, and sourceIn",
+      "actual": "Clip 'qa_1080p_landscape.mp4' dropped to track-video-1 at t=2.0s",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 7,
+      "name": "Clip Selection & Movement",
+      "status": "PASS",
+      "test_performed": "Interactive clip drag simulation (delta +3.5s) and duration recalculation",
+      "expected": "Clip startTime updates to 5.5s, boundaries respected, total duration matches",
+      "actual": "startTime updated: 2.0s -> 5.5s (End: 9.5s)",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 8,
+      "name": "Left/Right Non-Destructive Trimming",
+      "status": "PASS",
+      "test_performed": "Trim handles simulation (Left +1.5s, Right -1.0s)",
+      "expected": "startTime = 3.5s, sourceIn = 1.5s, duration = 3.5s, sourceDuration preserved at 10.0s",
+      "actual": "Trimmed clip: startTime=3.5s, sourceIn=1.5s, duration=3.5s",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 9,
+      "name": "Split & Delete Operations",
+      "status": "PASS",
+      "test_performed": "Split clip at t=2.5s followed by clip deletion by ID",
+      "expected": "Original 6.0s clip accurately split into 2.5s & 3.5s parts; deletion cleans array",
+      "actual": "Split verified (2.5s + 3.5s); Delete verified (count remaining: 2)",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 10,
+      "name": "Playhead Seeking & Frame Accuracy",
+      "status": "PASS",
+      "test_performed": "Timecode calculation at 30 FPS and timeline edge boundary clamping",
+      "expected": "4.5s -> 00:00:04:15 (frame 135); clamped range [0.0, 15.0]",
+      "actual": "Timecodes: 0s=00:00:00:00, 4.5s=00:00:04:15, 10s=00:00:10:00; Clamped: 0s to 15.0s",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 11,
+      "name": "Track Controls & Speech Audio Ducking",
+      "status": "PASS",
+      "test_performed": "Multi-track hierarchy toggles (V1, V2, A1, A2) and dynamic audio ducking math",
+      "expected": "Track muting state tracked; music ducks from 75% to 26.2% (-65%) during speech",
+      "actual": "V2 muted: True, Normal Music: 75.0%, Ducked Music: 26.200000000000003%",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 12,
+      "name": "Music Waveform & Beat Markers (Librosa)",
+      "status": "PASS",
+      "test_performed": "HTTP POST /api/ai/beats on qa_30s_beat.mp3",
+      "expected": "Rhythmic tempo BPM computed with frame-accurate beat markers and downbeat flags",
+      "actual": "Detected Tempo: 60.1 BPM, Total Beats: 29, Downbeats: 8",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 13,
+      "name": "AI Subtitle Generation & Editing (Whisper)",
+      "status": "PASS",
+      "test_performed": "HTTP POST /api/ai/transcribe on real speech dialogue video",
+      "expected": "Word-level timestamps extracted, language identified ('en'), words editable",
+      "actual": "Language: en, Words: 15, Text: 'Welcome to Real Studio Pro. Professional video edi...', Editable: WELCOME_EDITED",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 14,
+      "name": "Cinematic Color Presets & Sliders",
+      "status": "PASS",
+      "test_performed": "Verified all 5 Hollywood LUT presets (teal_orange, moody_monochrome, warm_film, vibrant_pop, vintage_gold) and CSS matrix calculation",
+      "expected": "Presets compile valid FFmpeg curves/colorbalance and real-time CSS filter strings",
+      "actual": "5/5 presets registered; CSS Filter compiled: 'contrast(1.25) saturate(1.3) brightness(1.05)'",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 15,
+      "name": "Transitions & Motion Effects",
+      "status": "PASS",
+      "test_performed": "Transition pills (none, crossfade, zoomIn, slideLeft, glitch) and motion effects integration",
+      "expected": "Transitions attached to clip schemas; active effects stack maintained in state",
+      "actual": "Selected transition: 'zoomIn', Active effects: ['story-progress', 'vignette']",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 16,
+      "name": "Project Persistence (Save & Reload)",
+      "status": "PASS",
+      "test_performed": "POST /api/project/save followed by GET /api/project/load/qa_full_project",
+      "expected": "100% data fidelity: 3 clips, 2 subtitles, mixer settings, color preset preserved",
+      "actual": "Saved to Projects/qa_full_project.json; loaded with 3 clips, duration=15.0s",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 17,
+      "name": "Export Settings & Progress Polling",
+      "status": "PASS",
+      "test_performed": "Asynchronous render job polling simulation across 0% -> 25% -> 55% -> 100%",
+      "expected": "Progress bar increments accurately; completed status returns output file details",
+      "actual": "Polled: 25% -> 55% -> 100% (completed)",
+      "error": "None",
+      "fix": "None"
+    },
+    {
+      "feature_num": 18,
+      "name": "Exported Video Playback & Stream Integrity",
+      "status": "PASS",
+      "test_performed": "FFprobe stream analysis & full FFmpeg decode error pass on Demonstration_Reel.mp4",
+      "expected": "Compliant H.264/AAC MP4 container, valid timestamps, zero frame decode errors",
+      "actual": "Codec: h264/aac, Res: 1080x1920, FPS: 30.0, Duration: 8.60s, Decode Errors: 0",
+      "error": "None",
+      "fix": "None"
+    }
+  ],
+  "hardware_benchmark": {
+    "nvenc_available": false,
+    "cpu_speed_x": 6.67,
+    "cpu_fps": 200.0,
+    "cpu_duration_s": 0.75,
+    "mf_speed_x": 9.26,
+    "mf_fps": 277.8,
+    "mf_duration_s": 0.54
+  },
+  "exports": [
+    {
+      "label": "9:16 Vertical Reel",
+      "file": "QA_Vertical_Reel_qa_exp.mp4",
+      "path": "E:\\reelstudio\\Exports\\QA_Vertical_Reel_qa_exp.mp4",
+      "width": 1080,
+      "height": 1920,
+      "duration": 6.0,
+      "fps": 30.0,
+      "v_codec": "h264",
+      "a_codec": "aac",
+      "size_mb": 2.35
+    },
+    {
+      "label": "16:9 Cinema",
+      "file": "QA_Landscape_Cinema_qa_exp.mp4",
+      "path": "E:\\reelstudio\\Exports\\QA_Landscape_Cinema_qa_exp.mp4",
+      "width": 1920,
+      "height": 1080,
+      "duration": 5.0,
+      "fps": 30.0,
+      "v_codec": "h264",
+      "a_codec": "aac",
+      "size_mb": 4.76
+    },
+    {
+      "label": "1:1 Square",
+      "file": "QA_Square_Post_qa_exp.mp4",
+      "path": "E:\\reelstudio\\Exports\\QA_Square_Post_qa_exp.mp4",
+      "width": 1080,
+      "height": 1080,
+      "duration": 5.0,
+      "fps": 30.0,
+      "v_codec": "h264",
+      "a_codec": "aac",
+      "size_mb": 2.43
+    },
+    {
+      "label": "30s Master Reel",
+      "file": "QA_30s_Master_Demonstration_Reel_qa_dem.mp4",
+      "path": "E:\\reelstudio\\Exports\\QA_30s_Master_Demonstration_Reel_qa_dem.mp4",
+      "width": 1080,
+      "height": 1920,
+      "duration": 28.0,
+      "fps": 30.0,
+      "v_codec": "h264",
+      "a_codec": "aac",
+      "size_mb": 6.03
+    }
+  ]
+}

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReelStudio Pro — AI Video Editor</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+  <!-- Top App Navigation Bar -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="app-brand">
+        <div class="brand-logo">RS</div>
+        <span class="brand-name">ReelStudio <span class="badge-pro">PRO</span></span>
+      </div>
+      <div class="project-title-wrapper">
+        <input type="text" id="project-name-input" class="project-name-input" value="Cinematic_Reel_01" title="Project Name">
+        <span id="save-status" class="save-status">Saved</span>
+      </div>
+    </div>
+
+    <div class="header-center">
+      <div class="aspect-ratio-selector">
+        <button class="aspect-btn active" data-aspect="9:16" title="Instagram Reels / Shorts (1080x1920)">9:16 Reel</button>
+        <button class="aspect-btn" data-aspect="16:9" title="Landscape Video (1920x1080)">16:9 Cinema</button>
+        <button class="aspect-btn" data-aspect="1:1" title="Square Video (1080x1080)">1:1 Square</button>
+      </div>
+      <div class="timecode-display" id="master-timecode">00:00:00:00</div>
+    </div>
+
+    <div class="header-right">
+      <button id="btn-ai-auto-edit" class="btn btn-ai" title="Launch 1-Click AI Auto-Edit Wizard">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        AI Auto-Edit
+      </button>
+      <button id="btn-save-project" class="btn btn-secondary" title="Save Project to disk">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Save
+      </button>
+      <button id="btn-export-modal" class="btn btn-primary" title="Export Final Master Video">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        Export
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Workstation Layout -->
+  <main class="workstation-container">
+    <!-- Left Panel: Tabs for Media, Effects, Transitions, Subtitles, Color, Mixer -->
+    <section class="left-panel">
+      <div class="panel-tabs">
+        <button class="tab-btn active" data-tab="tab-media" title="Media Library">Media</button>
+        <button class="tab-btn" data-tab="tab-effects" title="Video Effects">Effects</button>
+        <button class="tab-btn" data-tab="tab-transitions" title="Transitions">Transitions</button>
+        <button class="tab-btn" data-tab="tab-color" title="Color Grading">Color</button>
+        <button class="tab-btn" data-tab="tab-subtitles" title="Subtitle Editor">Captions</button>
+        <button class="tab-btn" data-tab="tab-mixer" title="Audio Mixer">Mixer</button>
+      </div>
+
+      <div class="tab-content-wrapper">
+        <!-- 1. Media Library Panel -->
+        <div id="tab-media" class="tab-pane active">
+          <div class="panel-section-header">
+            <h3>Media Library</h3>
+            <button id="btn-refresh-media" class="btn-icon" title="Refresh files">↻</button>
+          </div>
+          <div class="media-category-selector">
+            <button class="media-cat-btn active" data-cat="all">All</button>
+            <button class="media-cat-btn" data-cat="footage">Footage</button>
+            <button class="media-cat-btn" data-cat="music">Music</button>
+            <button class="media-cat-btn" data-cat="sound-effects">SFX</button>
+          </div>
+          <div id="media-grid" class="media-grid">
+            <!-- Media cards injected dynamically -->
+          </div>
+          <div class="media-actions">
+            <button id="btn-reframe-selected" class="btn btn-secondary btn-sm" title="Reframe 16:9 clip to 9:16">Auto Reframe 9:16</button>
+            <button id="btn-silence-selected" class="btn btn-secondary btn-sm" title="Remove silence from clip">Cut Silence</button>
+          </div>
+        </div>
+
+        <!-- 6. Effects Panel -->
+        <div id="tab-effects" class="tab-pane">
+          <div class="panel-section-header">
+            <h3>Cinematic Effects</h3>
+          </div>
+          <div class="effects-list">
+            <div class="effect-card" data-effect="dynamic-zoom">
+              <div class="effect-info">
+                <strong>Dynamic Push-In (Ken Burns)</strong>
+                <span>Subtle cinematic camera push-in</span>
+              </div>
+              <button class="btn btn-sm btn-secondary apply-effect-btn">Apply</button>
+            </div>
+            <div class="effect-card" data-effect="vignette">
+              <div class="effect-info">
+                <strong>Cinematic Vignette</strong>
+                <span>Dark radial borders for focal focus</span>
+              </div>
+              <button class="btn btn-sm btn-secondary apply-effect-btn">Apply</button>
+            </div>
+            <div class="effect-card" data-effect="motion-blur">
+              <div class="effect-info">
+                <strong>Motion Blur Emulation</strong>
+                <span>Simulate 180° shutter camera blur</span>
+              </div>
+              <button class="btn btn-sm btn-secondary apply-effect-btn">Apply</button>
+            </div>
+            <div class="effect-card" data-effect="story-progress">
+              <div class="effect-info">
+                <strong>Story Progress Bar</strong>
+                <span>Top animated Instagram Reel bar</span>
+              </div>
+              <button class="btn btn-sm btn-secondary apply-effect-btn">Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Transitions Panel -->
+        <div id="tab-transitions" class="tab-pane">
+          <div class="panel-section-header">
+            <h3>Transitions</h3>
+          </div>
+          <div class="transitions-grid">
+            <div class="transition-pill active" data-transition="none">Cut (None)</div>
+            <div class="transition-pill" data-transition="crossfade">Cross Dissolve</div>
+            <div class="transition-pill" data-transition="zoomIn">Zoom In Punch</div>
+            <div class="transition-pill" data-transition="slideLeft">Slide Left</div>
+            <div class="transition-pill" data-transition="glitch">Digital Glitch</div>
+          </div>
+          <p class="panel-tip">Select a clip on the timeline, then click a transition to apply to its entrance.</p>
+        </div>
+
+        <!-- 9. Color Grading Panel -->
+        <div id="tab-color" class="tab-pane">
+          <div class="panel-section-header">
+            <h3>Color Grading</h3>
+          </div>
+          <div class="color-presets-list">
+            <div class="color-preset-card active" data-preset="teal_orange">
+              <div class="preset-swatch teal-orange-swatch"></div>
+              <span>Teal & Orange (Blockbuster)</span>
+            </div>
+            <div class="color-preset-card" data-preset="moody_monochrome">
+              <div class="preset-swatch mono-swatch"></div>
+              <span>Moody Noir Monochrome</span>
+            </div>
+            <div class="color-preset-card" data-preset="warm_film">
+              <div class="preset-swatch warm-swatch"></div>
+              <span>Warm Film (Golden Hour)</span>
+            </div>
+            <div class="color-preset-card" data-preset="vibrant_pop">
+              <div class="preset-swatch vibrant-swatch"></div>
+              <span>Vibrant Social Pop</span>
+            </div>
+            <div class="color-preset-card" data-preset="vintage_gold">
+              <div class="preset-swatch vintage-swatch"></div>
+              <span>Vintage 1970s Gold</span>
+            </div>
+          </div>
+          <div class="color-sliders">
+            <div class="slider-group">
+              <label>Contrast <span id="contrast-val">1.15</span></label>
+              <input type="range" id="slider-contrast" min="0.8" max="1.5" step="0.05" value="1.15">
+            </div>
+            <div class="slider-group">
+              <label>Saturation <span id="saturation-val">1.25</span></label>
+              <input type="range" id="slider-saturation" min="0.5" max="2.0" step="0.05" value="1.25">
+            </div>
+            <div class="slider-group">
+              <label>Brightness <span id="brightness-val">1.00</span></label>
+              <input type="range" id="slider-brightness" min="0.7" max="1.3" step="0.05" value="1.00">
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Subtitle Editor Panel -->
+        <div id="tab-subtitles" class="tab-pane">
+          <div class="panel-section-header">
+            <h3>Animated AI Captions</h3>
+            <button id="btn-run-whisper" class="btn btn-sm btn-secondary" title="Transcribe speech with Whisper">Auto Transcribe</button>
+          </div>
+          <div class="subtitle-settings">
+            <label>Active Highlight Color</label>
+            <input type="color" id="caption-color-input" value="#FFE600">
+          </div>
+          <div id="subtitles-list" class="subtitles-list">
+            <!-- Dynamic word list -->
+          </div>
+          <button id="btn-add-caption-word" class="btn btn-secondary btn-block">+ Add Word</button>
+        </div>
+
+        <!-- 10. Audio Mixer Panel -->
+        <div id="tab-mixer" class="tab-pane">
+          <div class="panel-section-header">
+            <h3>Audio Mixer & Normalization</h3>
+          </div>
+          <div class="mixer-channels">
+            <div class="mixer-fader-card">
+              <label>Master Volume</label>
+              <input type="range" id="mixer-master" min="0" max="1.5" step="0.05" value="1.0">
+              <span id="mixer-master-val">0 dB (100%)</span>
+            </div>
+            <div class="mixer-fader-card">
+              <label>Dialogue / Voiceover (A1)</label>
+              <input type="range" id="mixer-voice" min="0" max="1.5" step="0.05" value="1.0">
+              <span id="mixer-voice-val">100%</span>
+            </div>
+            <div class="mixer-fader-card">
+              <label>Music & Beats (A2)</label>
+              <input type="range" id="mixer-music" min="0" max="1.5" step="0.05" value="0.75">
+              <span id="mixer-music-val">75%</span>
+            </div>
+          </div>
+          <div class="mixer-options">
+            <label class="checkbox-label">
+              <input type="checkbox" id="mixer-ducking" checked>
+              <span>Auto-Duck Music During Speech (200ms curve)</span>
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="mixer-loudnorm" checked>
+              <span>EBU R128 Loudness Normalization (-16 LUFS)</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Center/Right Panel: Preview Monitor -->
+    <section class="center-panel">
+      <div class="preview-monitor-header">
+        <div class="preview-title">
+          <span class="indicator-live"></span>
+          <span>PROGRAM MONITOR</span>
+          <span class="preview-res-badge" id="preview-res-badge">1080 x 1920 (9:16)</span>
+        </div>
+        <div class="preview-tools">
+          <label class="safe-zone-toggle">
+            <input type="checkbox" id="toggle-safe-zones" checked>
+            <span>Instagram Safe Zones</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="preview-viewport-container">
+        <!-- 2. Preview Monitor Frame -->
+        <div id="preview-frame" class="preview-frame aspect-9-16">
+          <video id="main-video-player" playsinline preload="auto"></video>
+          <audio id="main-audio-player" preload="auto"></audio>
+          
+          <!-- Live Overlay Canvas for Captions, Graphics & Titles -->
+          <div id="preview-overlay" class="preview-overlay">
+            <div id="live-caption-display" class="live-caption-display"></div>
+            <div id="live-title-display" class="live-title-display"></div>
+          </div>
+
+          <!-- Instagram Safe Zone Overlay -->
+          <div id="safe-zones-overlay" class="safe-zones-overlay active">
+            <div class="safe-header-zone">Header & Story Progress Safe Area (120px)</div>
+            <div class="safe-action-rail">Right Rail (Likes/Shares/Comments)</div>
+            <div class="safe-bottom-zone">Caption & Audio Pill Safe Area (260px)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Playback Transport Controls -->
+      <div class="playback-controls">
+        <button id="btn-step-backward" class="control-btn" title="Step Back 1s">⏮ 1s</button>
+        <button id="btn-play-pause" class="control-btn play-btn" title="Play / Pause (Spacebar)">▶</button>
+        <button id="btn-step-forward" class="control-btn" title="Step Forward 1s">1s ⏭</button>
+        <div class="timeline-quick-tools">
+          <button id="btn-split-clip" class="control-btn" title="Split Clip at Playhead (S)">✂ Split</button>
+          <button id="btn-delete-clip" class="control-btn" title="Delete Selected Clip (Del)">🗑 Delete</button>
+          <button id="btn-snap-beats" class="control-btn" title="Snap Cuts to Nearest Beat">🎵 Snap Beats</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 3. Multi-Track Timeline Section -->
+  <footer class="timeline-section">
+    <div class="timeline-toolbar">
+      <div class="toolbar-left">
+        <span class="timeline-title">TIMELINE</span>
+        <button id="btn-zoom-out" class="btn-icon" title="Zoom Out Timeline">−</button>
+        <input type="range" id="timeline-zoom-slider" min="10" max="120" value="40" title="Timeline Zoom">
+        <button id="btn-zoom-in" class="btn-icon" title="Zoom In Timeline">+</button>
+      </div>
+      <div class="toolbar-center">
+        <span id="timeline-duration-label" class="duration-label">Duration: 15.0s | 450 Frames</span>
+      </div>
+      <div class="toolbar-right">
+        <button id="btn-add-video-track" class="btn btn-sm btn-secondary">+ Video Track</button>
+        <button id="btn-add-audio-track" class="btn btn-sm btn-secondary">+ Audio Track</button>
+      </div>
+    </div>
+
+    <div class="timeline-scroll-area" id="timeline-scroll-area">
+      <div class="timeline-track-headers">
+        <!-- Track Labels (4. Video Tracks & 5. Audio Tracks) -->
+        <div class="track-header" data-track-id="track-video-2">
+          <span class="track-tag tag-video">V2</span>
+          <span class="track-title">Overlays & Titles</span>
+          <div class="track-btns">
+            <button class="track-mute-btn" title="Mute/Hide">👁</button>
+          </div>
+        </div>
+        <div class="track-header" data-track-id="track-video-1">
+          <span class="track-tag tag-video">V1</span>
+          <span class="track-title">Main Footage</span>
+          <div class="track-btns">
+            <button class="track-mute-btn" title="Mute/Hide">👁</button>
+          </div>
+        </div>
+        <div class="track-header" data-track-id="track-audio-1">
+          <span class="track-tag tag-audio">A1</span>
+          <span class="track-title">Voice / Speech</span>
+          <div class="track-btns">
+            <button class="track-mute-btn" title="Mute Audio">🔊</button>
+          </div>
+        </div>
+        <div class="track-header" data-track-id="track-audio-2">
+          <span class="track-tag tag-audio">A2</span>
+          <span class="track-title">Music & Beats</span>
+          <div class="track-btns">
+            <button class="track-mute-btn" title="Mute Audio">🔊</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-lanes-container" id="timeline-lanes-container">
+        <!-- Time Ruler with Second Markers & Playhead -->
+        <div class="timeline-ruler" id="timeline-ruler">
+          <div id="ruler-ticks" class="ruler-ticks"></div>
+          <div id="playhead" class="timeline-playhead">
+            <div class="playhead-handle"></div>
+            <div class="playhead-line"></div>
+          </div>
+        </div>
+
+        <!-- Lanes for Clips -->
+        <div class="timeline-track-lane" id="lane-track-video-2" data-track-id="track-video-2"></div>
+        <div class="timeline-track-lane" id="lane-track-video-1" data-track-id="track-video-1"></div>
+        <div class="timeline-track-lane" id="lane-track-audio-1" data-track-id="track-audio-1"></div>
+        <div class="timeline-track-lane" id="lane-track-audio-2" data-track-id="track-audio-2"></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AI AUTO-EDIT MODAL DIALOG -->
+  <div id="modal-ai-auto-edit" class="modal-backdrop">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2>AI Auto-Edit Wizard</h2>
+        <button class="btn-close-modal" id="btn-close-ai-modal">×</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc">
+          Automatically analyze imported video clips, detect scene changes, match musical beats with Librosa, generate AI subtitles with Whisper, and build a ready-to-render Instagram Reel.
+        </p>
+
+        <div class="form-group">
+          <label>Target Duration</label>
+          <select id="auto-edit-duration">
+            <option value="15.0">15 Seconds (Optimal Instagram Reel)</option>
+            <option value="30.0">30 Seconds (Extended Reel / Story)</option>
+            <option value="60.0">60 Seconds (Full Showcase)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Background Music Track</label>
+          <select id="auto-edit-music-select">
+            <option value="rhythmic_beat.mp3">rhythmic_beat.mp3 (Librosa Beat-Synced)</option>
+            <option value="sample_beat.mp3">sample_beat.mp3</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Cinematic Color Preset</label>
+          <select id="auto-edit-color">
+            <option value="teal_orange">Teal & Orange (Blockbuster Cinema)</option>
+            <option value="warm_film">Warm Film (Golden Hour)</option>
+            <option value="moody_monochrome">Moody Noir Monochrome</option>
+            <option value="vibrant_pop">Vibrant Social Pop</option>
+          </select>
+        </div>
+
+        <div class="modal-checkboxes">
+          <label class="checkbox-label">
+            <input type="checkbox" id="auto-edit-snap-beats" checked>
+            <span>Snap cuts to musical beats and downbeats</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="auto-edit-whisper" checked>
+            <span>Auto-generate word-level subtitles (Whisper)</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" id="auto-edit-silence" checked>
+            <span>Automatically remove dead air pauses (>400ms)</span>
+          </label>
+        </div>
+
+        <!-- AI Progress Stepper -->
+        <div id="ai-stepper" class="ai-stepper hidden">
+          <div class="step-item" id="step-scenes">1. Scanning scenes & cuts...</div>
+          <div class="step-item" id="step-beats">2. Analyzing Librosa rhythm & tempo...</div>
+          <div class="step-item" id="step-curate">3. Curating high-retention shots...</div>
+          <div class="step-item" id="step-captions">4. Generating word-level subtitles...</div>
+        </div>
+
+        <!-- AI Proposal Review Section -->
+        <div id="ai-proposal-preview" class="ai-proposal-preview hidden">
+          <h4>Proposed Timeline Ready for Review</h4>
+          <p id="ai-proposal-summary">4 cuts aligned to beats, 15.0s total duration, Teal & Orange grade applied.</p>
+          <div class="approval-notice">Manual adjustments are enabled. Review and click "Approve & Apply to Timeline".</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-cancel-ai" class="btn btn-secondary">Cancel</button>
+        <button id="btn-start-ai-analysis" class="btn btn-ai">Run Analysis</button>
+        <button id="btn-apply-ai-timeline" class="btn btn-primary hidden">Approve & Apply to Timeline</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. EXPORT PANEL MODAL -->
+  <div id="modal-export" class="modal-backdrop">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2>Export Master Video</h2>
+        <button class="btn-close-modal" id="btn-close-export-modal">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Export Preset</label>
+          <select id="export-preset-select">
+            <option value="reels-1080-1920">Instagram Reel (1080x1920, 30 FPS, H.264)</option>
+            <option value="reels-60fps">Instagram Reel High Motion (1080x1920, 60 FPS)</option>
+            <option value="cinema-1080p">Landscape Cinema Master (1920x1080, 30 FPS)</option>
+            <option value="square-1080p">Square Social Post (1080x1080, 30 FPS)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Video Quality / CRF</label>
+          <select id="export-quality-select">
+            <option value="18">CRF 18 — High Bitrate Master (Crisp Details)</option>
+            <option value="21">CRF 21 — Balanced Web Delivery (Recommended)</option>
+            <option value="26">CRF 26 — Small File Size</option>
+          </select>
+        </div>
+
+        <div id="export-progress-container" class="export-progress-container hidden">
+          <div class="progress-bar-track">
+            <div id="export-progress-fill" class="progress-bar-fill"></div>
+          </div>
+          <span id="export-progress-text" class="export-progress-text">Rendering video...</span>
+        </div>
+
+        <div id="export-result-container" class="export-result-container hidden">
+          <div class="success-banner">Render Complete!</div>
+          <p id="export-file-details">Exported to Exports/MyReel.mp4 (4.2 MB)</p>
+          <a id="export-download-link" href="#" class="btn btn-primary btn-block" download>Open / Download Video</a>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-cancel-export" class="btn btn-secondary">Close</button>
+        <button id="btn-start-export" class="btn btn-primary">Start Export</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

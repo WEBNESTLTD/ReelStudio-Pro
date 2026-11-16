@@ -1,0 +1,81 @@
+# ==============================================================================
+# ReelStudio Pro — Comprehensive Git Ignore Policy
+# ==============================================================================
+
+# 1. Virtual Environments & Python Distributions
+.venv/
+venv/
+env/
+ENV/
+video-editor/.venv/
+video-editor/venv/
+
+# 2. Node & Build Dependencies
+node_modules/
+video-editor/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# 3. Personal & Raw Media (Strict Exclusion Policy)
+Originals/*
+!Originals/.gitkeep
+
+# 4. Rendered Video Exports & Intermediate Deliverables
+Exports/*
+!Exports/.gitkeep
+video-editor/output/*
+!video-editor/output/.gitkeep
+video-editor/temp/*
+!video-editor/temp/.gitkeep
+
+# 5. Generated QA Test Media & Large Video Artifacts
+video-editor/public/footage/qa/*.mp4
+video-editor/public/music/qa/*.mp4
+
+# 6. Pre-trained AI/ML Model Checkpoints (Downloaded on Demand)
+video-editor/models/*.pt
+video-editor/models/*.pth
+video-editor/models/*.onnx
+video-editor/models/*.bin
+!video-editor/models/.gitkeep
+
+# 7. Python Bytecode, Caches & Test Artifacts
+__pycache__/
+*/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# 8. Remotion Bundler & Runtime Caches
+.remotion/
+video-editor/.remotion/
+
+# 9. Operating System & Editor Metadata
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# 10. Secrets, Passwords, Tokens & Private Credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.token
+credentials.json
+client_secrets.json
+id_rsa*
+id_ed25519*

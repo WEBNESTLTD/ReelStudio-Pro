@@ -1,0 +1,116 @@
+{
+  "timestamp": 1794853299.0442133,
+  "task_1_gpu": {
+    "gpu_info": {
+      "name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+      "driver_version": "616.56",
+      "memory_total_mb": 6144.0,
+      "memory_used_mb": 869.0,
+      "gpu_util_pct": 32.0,
+      "temp_c": 47.0,
+      "power_w": 3.37
+    },
+    "pnp_status": "OK",
+    "export_duration_s": 0.517,
+    "meta": {
+      "file_name": "task1_nvenc_test.mp4",
+      "path": "E:\\reelstudio\\Exports\\QA\\task1_nvenc_test.mp4",
+      "duration_seconds": 3.0,
+      "fps": 30.0,
+      "width": 1920,
+      "height": 1080,
+      "aspect_ratio": "16:9 (Landscape)",
+      "video_codec": "h264",
+      "audio_codec": "none",
+      "size_mb": 0.09
+    },
+    "decode_errors": 0
+  },
+  "task_2_encoder_matrix": {
+    "nvenc": {
+      "name": "NVIDIA NVENC (h264_nvenc)",
+      "tier": 1,
+      "type": "NVIDIA Hardware ASIC",
+      "available": true,
+      "device": "NVIDIA GeForce RTX 3050 6GB Laptop GPU"
+    },
+    "qsv": {
+      "name": "Intel QuickSync (h264_qsv)",
+      "tier": 2,
+      "type": "Intel Hardware QSV",
+      "available": false,
+      "device": "Intel UHD Graphics"
+    },
+    "mf": {
+      "name": "Windows Media Foundation (h264_mf)",
+      "tier": 3,
+      "type": "Windows MFT Framework",
+      "available": true,
+      "device": "System Media Foundation MFT"
+    },
+    "libx264": {
+      "name": "CPU Multi-Threaded (libx264)",
+      "tier": 4,
+      "type": "x86-64 SIMD Software",
+      "available": true,
+      "device": "Intel CPU (AVX2/FMA3)"
+    }
+  },
+  "task_4_benchmark": [
+    {
+      "name": "NVIDIA NVENC (Hardware)",
+      "encoder": "h264_nvenc",
+      "encode_time_s": 0.685,
+      "average_fps": 219.0,
+      "speed_multiplier": 7.3,
+      "size_kb": 5026.9,
+      "resolution": "1080x1920",
+      "decode_errors": 0,
+      "gpu_temp_c": 49.0,
+      "gpu_mem_used_mb": 863.0
+    },
+    {
+      "name": "Windows MediaFoundation",
+      "encoder": "h264_mf",
+      "encode_time_s": 0.688,
+      "average_fps": 218.0,
+      "speed_multiplier": 7.27,
+      "size_kb": 2999.3,
+      "resolution": "1080x1920",
+      "decode_errors": 0,
+      "gpu_temp_c": 51.0,
+      "gpu_mem_used_mb": 863.0
+    },
+    {
+      "name": "CPU Multi-Threaded (libx264)",
+      "encoder": "libx264",
+      "encode_time_s": 0.856,
+      "average_fps": 175.2,
+      "speed_multiplier": 5.84,
+      "size_kb": 2099.3,
+      "resolution": "1080x1920",
+      "decode_errors": 0,
+      "gpu_temp_c": 51.0,
+      "gpu_mem_used_mb": 863.0
+    }
+  ],
+  "task_3_regression": {
+    "final_master": "E:\\reelstudio\\Exports\\Demonstration_Reel_30s_NVENC.mp4",
+    "render_time_s": 13.929,
+    "speed_x": 2.15,
+    "fps": 64.6,
+    "meta": {
+      "file_name": "Demonstration_Reel_30s_NVENC.mp4",
+      "path": "E:\\reelstudio\\Exports\\Demonstration_Reel_30s_NVENC.mp4",
+      "duration_seconds": 30.0,
+      "fps": 30.0,
+      "width": 1080,
+      "height": 1920,
+      "aspect_ratio": "9:16 (Vertical Reel)",
+      "video_codec": "h264",
+      "audio_codec": "aac",
+      "size_mb": 10.51
+    },
+    "errors": 0
+  }
+}

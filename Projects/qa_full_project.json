@@ -1,0 +1,65 @@
+{
+  "projectName": "qa_full_project",
+  "aspectRatio": "9:16",
+  "resolution": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "duration": 15.0,
+  "clips": [
+    {
+      "id": "c_qa_1",
+      "trackId": "track-video-1",
+      "path": "E:\\reelstudio\\video-editor\\public\\footage\\qa\\qa_1080p_landscape.mp4",
+      "name": "qa_1080p_landscape.mp4",
+      "startTime": 0.0,
+      "duration": 5.0,
+      "sourceIn": 0.0,
+      "type": "video",
+      "transition": "zoomIn"
+    },
+    {
+      "id": "c_qa_2",
+      "trackId": "track-video-1",
+      "path": "E:\\reelstudio\\video-editor\\public\\footage\\qa\\qa_9_16_vertical.mp4",
+      "name": "qa_9_16_vertical.mp4",
+      "startTime": 5.0,
+      "duration": 5.0,
+      "sourceIn": 0.0,
+      "type": "video",
+      "transition": "crossfade"
+    },
+    {
+      "id": "c_qa_audio",
+      "trackId": "track-audio-2",
+      "path": "E:\\reelstudio\\video-editor\\public\\music\\qa\\qa_30s_beat.mp3",
+      "name": "qa_30s_beat.mp3",
+      "startTime": 0.0,
+      "duration": 10.0,
+      "sourceIn": 0.0,
+      "type": "audio",
+      "volume": 0.75
+    }
+  ],
+  "subtitles": [
+    {
+      "start": 0.5,
+      "end": 2.0,
+      "word": "REELSTUDIO"
+    },
+    {
+      "start": 2.2,
+      "end": 4.5,
+      "word": "AUTOMATION"
+    }
+  ],
+  "colorPreset": "teal_orange",
+  "audioMixer": {
+    "master": 1.0,
+    "voice": 1.0,
+    "music": 0.75,
+    "ducking": true,
+    "loudnorm": true
+  }
+}
